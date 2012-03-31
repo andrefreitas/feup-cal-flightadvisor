@@ -6,30 +6,20 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#include <iostream>
-#include <vector>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <fstream>
-
-#include "FileOperation.h"
+#include "GraphOperation.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {       
-     vector< vector<string> > test =FileOperation::loadFile("/Users/Sirae/Documents/airports.csv");
+    Graph<string> t1 = GraphOperation::createGraph<string>();
+    vector<Vertex<string> *> vertexSet = t1.getVertexSet();
+
     
-    for (int i = 0; i < test.size(); i++)
+    for (int i = 0; i < vertexSet.size();i++)
     {
-        for (int j = 0; j < test[i].size(); j++)
-        {
-            cout << test[i][j] << "   ";
-        }
-        cout << "\n";
+        cout << vertexSet[i]->getInfo() << "\n ------- \n";
     }
-   
     return 0;
     
 }
