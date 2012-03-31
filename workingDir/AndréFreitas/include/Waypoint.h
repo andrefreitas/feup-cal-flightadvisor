@@ -16,6 +16,8 @@ protected:
 
 	//! The identification name of the waypoint
 	string id;
+	//! Country name
+	string country;
 	//! The latitude and longitude of the waypoint
 	Localization localization;
 
@@ -23,28 +25,34 @@ public:
 	//! Constructor
 	/*!
 	 \param id the identification
+	 \param country the country name
 	 \param loc the the gps localization
 	 */
-	Waypoint(string id, Localization loc);
+	Waypoint(string id, string country, Localization loc);
 
 	//! Constructor
 	/*!
 	 \param id the identification
+	 \param country the country name
 	 \param lat the latitude
 	 \param lon the longitude
 	 */
-	Waypoint(string id, long double lat, long double lon);
+	Waypoint(string id, string country,long double lat, long double lon);
 
 	//! Empty constructor
 	Waypoint(){};
 
 	//! Get the identification
 	string getID();
+	//! Get the country
+	string getCountry();
 	//! Get the localization
 	Localization getLocalization();
 
 	//! Set the identification
 	void setID(string id);
+	//! Set the country
+	void setCountry(string country);
 	//! Set the localization with explicit values
 	void setLocalization(long double lat, long double lon);
 	//! Set the localization
@@ -53,17 +61,31 @@ public:
 	//! Return if is an airport
 	virtual bool isAirport();
 
-	/* Virtual Functions for sub-class airport
-	virtual string getName() const=0;
-	virtual string getCountry() const=0;
-	virtual string getIATA() const=0;
-	virtual string getICAO() const=0;
-	virtual void setName(string name) const=0 ;
-	virtual void setCountry(string country) const=0;
-	virtual void setIATA(string iata) const=0;
-	virtual void setICAO(string icao) const=0 ; */
+	//! Set data by vector of strings
+	virtual void setByStrings(vector<string> data);
+
+	//Virtual Functions for sub-class airport
+	virtual string getName(){
+		return "this is a Waypoint";
+	}
+	virtual string getIATA(){
+		return "this is a Waypoint";
+	}
+	virtual string getICAO(){
+		return "this is a Waypoint";
+	}
+	virtual void setName(string name){}
+	virtual void setIATA(string iata){}
+	virtual void setICAO(string icao){}
 
 
 };
 
+//! Invalid Strings size exception class
+class InvalidStringsSizeException {
+public:
+	InvalidStringsSizeException(){};
+};
+//! Operator << overloading
+ostream& operator<<(ostream& os,  Waypoint& a);
 #endif

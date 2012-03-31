@@ -13,8 +13,6 @@ class Airport: public Waypoint {
 protected:
 	//! The human friendly name of the airport
 	string name;
-	//! Country name
-	string country;
 	//! The code assigned by International Air Transport Association (IATA)
 	string IATA;
 	//! The code assigned by International Civil Aviation Organization(ICAO)
@@ -43,8 +41,6 @@ public:
 
 	//! Get the name
 	string getName();
-	//! Get the country
-	string getCountry();
 	//! Get the IATA
 	string getIATA();
 	//! Get theICAO
@@ -52,12 +48,12 @@ public:
 
 	//! Set the name
 	void setName(string name);
-	//! Set the country
-	void setCountry(string country);
 	//! Set the IATA
 	void setIATA(string IATA);
 	//! Set the ICAO
 	void setICAO(string ICAO);
+	//! Set data by vector of strings
+	void setByStrings(vector<string> data);
 
 	//! Evaluates if is an airport
 	bool isAirport();
@@ -75,5 +71,8 @@ class InvalidICAOException {
 public:
 	InvalidICAOException(){};
 };
+
+//! Airport Operator << overloading
+ostream& operator<<(ostream& os,  Airport& a);
 
 #endif
