@@ -7,5 +7,8 @@
 	* André Freitas - p.andrefreitas@gmail.com
 	* Olivier Alves - olivieralves1@gmail.com
 	* Tiago Tavares -
-	
-	
+
+== Folders ==
+	* code: the main project code;
+	* docs: sharing of documents regarding the project development;
+	* workingDir: directory where every developer have their own folder.
