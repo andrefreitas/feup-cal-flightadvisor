@@ -1,7 +1,5 @@
 #include "designer.h"
 
-std::string Designer::defautFile = "airports.txt";
-
 Designer::Designer(int x, int y, string path, vector<Nodes>n1, vector<Edges>e1) {
 	//Accepts minimum 600x600 MAX->1000, 700
 	graph = new GraphViewer(x, y, false);

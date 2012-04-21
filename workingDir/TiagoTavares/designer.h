@@ -31,7 +31,6 @@ private:
 	void loadNodes();
 	void loadEdges();
  public:
-  static string defautFile;
   //Constructor
   Designer(int x, int y, string path, vector<Nodes>n1, vector<Edges>e1);
   bool addNode(int id, int x, int y, string title, string color);
