@@ -11,8 +11,6 @@ using namespace std;
  */
 class Airport: public Waypoint {
 protected:
-	//! The human friendly name of the airport
-	string name;
 	//! The code assigned by International Air Transport Association (IATA)
 	string IATA;
 	//! The code assigned by International Civil Aviation Organization(ICAO)
@@ -21,33 +19,31 @@ protected:
 public:
 	//! Constructor
 	/*!
+	 \param country the country name
 	 \param name the know name of the airport
 	 \param IATA the IATA code
 	 \param ICAO the ICAO code
 	 \param localization the gps localization
 	 */
-	Airport(string name,string country, string IATA, string ICAO, Localization localization);
+	Airport(string country,string name, string IATA, string ICAO, Localization localization);
 	//! Constructor
 	/*!
+	 \param country the country name
 	 \param name the know name of the airport
 	 \param IATA the IATA code
 	 \param ICAO the ICAO code
 	 \param localization the gps localization
 	 */
-	Airport(string name,string country, string IATA, string ICAO, long double lat,
+	Airport(string country,string name, string IATA, string ICAO, long double lat,
 			long double lon);
 	//! Empty constructor
 	Airport(){};
 
-	//! Get the name
-	string getName();
 	//! Get the IATA
 	string getIATA();
 	//! Get theICAO
 	string getICAO();
 
-	//! Set the name
-	void setName(string name);
 	//! Set the IATA
 	void setIATA(string IATA);
 	//! Set the ICAO

@@ -13,9 +13,9 @@ using namespace std;
 class testAirport {
 public:
 	static void testData() {
-		Airport a("Aeroporto Francisco Sá Carneiro", "Portugal", "OPO", "LPPO",
+		Airport a("Portugal","Aeroporto Francisco Sá Carneiro", "OPO", "LPPO",
 				Localization(-3.2222, 1.222));
-		Airport b("Aeroporto da Portela", "Portugal", "LIS", "LPPT", -4.2222,
+		Airport b( "Portugal","Aeroporto da Portela", "LIS", "LPPT", -4.2222,
 				6.222);
 		Airport c;
 
@@ -109,16 +109,16 @@ public:
 
 	}
 	static void testOperators() {
-		Airport a("Aeroporto Francisco Sá Carneiro", "Portugal", "OPO", "LPPO",
+		Airport a("Portugal","Aeroporto Francisco Sá Carneiro", "OPO", "LPPO",
 				Localization(-3.2222, 1.222));
 		ostringstream aux;
 		aux << a;
 		ASSERT_EQUAL(aux.str(),
-				"Aeroporto Francisco Sá Carneiro Portugal OPO LPPO -3.2222 1.222");
+				"Portugal Aeroporto Francisco Sá Carneiro OPO LPPO -3.2222 1.222");
 	}
 
 	static void testWaypointContext() {
-		Waypoint *p = new Airport("Aeroporto Francisco Sá Carneiro", "Portugal",
+		Waypoint *p = new Airport( "Portugal","Aeroporto Francisco Sá Carneiro",
 				"OPO", "LPPO", Localization(-3.2222, 1.222));
 
 		ASSERT_EQUAL(p->getName(), "Aeroporto Francisco Sá Carneiro");

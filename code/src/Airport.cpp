@@ -1,8 +1,7 @@
 #include "Airport.h"
 #include <stdlib.h>
-Airport::Airport(string name,string country, string IATA, string ICAO,
-		Localization localization):Waypoint(ICAO, country,localization) {
-	this->name = name;
+Airport::Airport(string country,string name,string IATA, string ICAO,
+		Localization localization):Waypoint(country, name,ICAO,localization) {
 
 	if(IATA.size()!=3) throw new InvalidIATAException();
 	this->IATA = IATA;
@@ -13,17 +12,11 @@ Airport::Airport(string name,string country, string IATA, string ICAO,
 	this->country=country;
 }
 
-Airport::Airport(string name,string country, string IATA, string ICAO, long double lat,
-		long double lon):Waypoint(ICAO, country,lat, lon) {
-	this->name = name;
+Airport::Airport(string country,string name, string IATA, string ICAO, long double lat,
+		long double lon):Waypoint(country, name,ICAO,lat, lon) {
 	this->IATA = IATA;
 	this->ICAO = ICAO;
 
-}
-
-
-string Airport::getName(){
-	return name;
 }
 
 
@@ -35,10 +28,6 @@ string Airport::getICAO(){
 	return ICAO;
 }
 
-
-void Airport::setName(string name){
-	this->name=name;
-}
 
 void Airport::setIATA(string IATA){
 	if(IATA.size()!=3) throw  InvalidIATAException();
@@ -71,6 +60,6 @@ void Airport::setByStrings(vector<string> data){
 
 
 ostream& operator<<(ostream& os,  Airport& a){
-	os << a.getName() << " " << a.getCountry()<< " " << a.getIATA() << " " << a.getICAO() <<  " " << a.getLocalization().getLatitude() << " " << a.getLocalization().getLongitude();
+	os << a.getCountry() << " " << a.getName()<< " " << a.getIATA() << " " << a.getICAO() <<  " " << a.getLocalization().getLatitude() << " " << a.getLocalization().getLongitude();
 	return os;
 }

@@ -16,6 +16,8 @@ protected:
 
 	//! The identification name of the waypoint
 	string id;
+	//! The human friendly name of the waypoint
+	string name;
 	//! Country name
 	string country;
 	//! The latitude and longitude of the waypoint
@@ -24,20 +26,22 @@ protected:
 public:
 	//! Constructor
 	/*!
-	 \param id the identification
 	 \param country the country name
+	 \param name the name of the waypoint
+	 \param id the identification
 	 \param loc the the gps localization
 	 */
-	Waypoint(string id, string country, Localization loc);
+	Waypoint(string country, string name, string id, Localization loc);
 
 	//! Constructor
 	/*!
-	 \param id the identification
 	 \param country the country name
+	 \param name the name of the waypoint
+	 \param id the identification
 	 \param lat the latitude
 	 \param lon the longitude
 	 */
-	Waypoint(string id, string country,long double lat, long double lon);
+	Waypoint(string country, string name, string id,long double lat, long double lon);
 
 	//! Empty constructor
 	Waypoint(){};
@@ -48,6 +52,8 @@ public:
 	string getCountry();
 	//! Get the localization
 	Localization getLocalization();
+	//! Get the name
+	string getName();
 
 	//! Set the identification
 	void setID(string id);
@@ -57,6 +63,8 @@ public:
 	void setLocalization(long double lat, long double lon);
 	//! Set the localization
 	void setLocalization(Localization loc);
+	//! Set the name
+	void setName(string name);
 
 	//! Return if is an airport
 	virtual bool isAirport();
@@ -65,16 +73,12 @@ public:
 	virtual void setByStrings(vector<string> data);
 
 	//Virtual Functions for sub-class airport
-	virtual string getName(){
-		return "this is a Waypoint";
-	}
 	virtual string getIATA(){
 		return "this is a Waypoint";
 	}
 	virtual string getICAO(){
 		return "this is a Waypoint";
 	}
-	virtual void setName(string name){}
 	virtual void setIATA(string iata){}
 	virtual void setICAO(string icao){}
 
