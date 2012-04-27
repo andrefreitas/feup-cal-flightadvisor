@@ -8,6 +8,7 @@
 
 #include "LoadData.h"
 #include "Graph.h"
+#include "Localization.h"
 
 vector< vector<string> > LoadData::loadFile(string nameFile){
      vector< vector<string> > fileFinalInformation;
@@ -62,7 +63,7 @@ Graph<string> LoadData::createGraph(){
         //create airport vertex
         for (int unsigned i = 0; i < airports.size(); i++)
         {
-            string icao = airports[i][2];
+            string icao = airports[i][3];
             networkGraph.addVertex(icao);
         }
         
@@ -81,10 +82,64 @@ Graph<string> LoadData::createGraph(){
             {
                 string previous = network[i][j];
                 string next = network[i][j+1];
-                
-                networkGraph.addEdge(previous, next, 100);
+                Waypoint prev=getWayPointbyID(previous);
+                Waypoint nex=getWayPointbyID(next);
+                long double distance=Localization::distance(prev.getLocalization(),nex.getLocalization());
+                //cout << prev << " => " << nex << ": distance= " <<distance << endl;
+                networkGraph.addEdge(previous, next, distance);
             }
         }
         
         return networkGraph;
     }
+
+vector<Waypoint> LoadData::waypoints=vector<Waypoint>();
+
+vector<Airport> LoadData::airports= vector<Airport>();
+
+vector<Waypoint> LoadData::loadWaypoints(string nameFile){
+	// (1) fetch the waypoint vector of lines
+	vector< vector<string> > waypoint =LoadData::loadFile(nameFile);
+
+	// (2) add to the vector
+	waypoints.clear();
+	for (int unsigned i=0; i<waypoint.size(); i++){
+		Waypoint *p;
+		p=new Waypoint();
+		try{
+			p->setByStrings(waypoint[i]);
+		}
+		catch(InvalidStringsSizeException){
+			cout << nameFile << ", line " << i+1 << ": invalid waypoint!\n";
+		}
+		LoadData::waypoints.push_back(*p);
+	}
+	return waypoints;
+}
+
+vector<Airport> LoadData::loadAirports(string nameFile){
+	// (1) fetch the waypoint vector of lines
+	vector< vector<string> > airport =LoadData::loadFile(nameFile);
+
+	// (2) add to the vector
+	airports.clear();
+	for (int unsigned i=0; i<airport.size(); i++){
+		Airport *p;
+		p=new Airport();
+		try{
+			p->setByStrings(airport[i]);
+		}
+		catch(InvalidStringsSizeException){
+			cout << nameFile << ", line " <<  i+1  << ": invalid airport!";
+				}
+		LoadData::airports.push_back(*p);
+	}
+	return airports;
+}
+
+Waypoint LoadData::getWayPointbyID(string id){
+	for(int unsigned i=0; i<waypoints.size(); i++)
+		if (waypoints[i].getID()==id) return waypoints[i];
+	for(int unsigned i=0; i<airports.size(); i++)
+			if (airports[i].getID()==id) return airports[i];
+}

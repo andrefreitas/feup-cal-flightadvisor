@@ -1,5 +1,7 @@
 #include "Airport.h"
 #include <stdlib.h>
+#include <iostream>
+using namespace std;
 Airport::Airport(string country,string name,string IATA, string ICAO,
 		Localization localization):Waypoint(country, name,ICAO,localization) {
 

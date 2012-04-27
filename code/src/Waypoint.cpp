@@ -66,6 +66,6 @@ void Waypoint::setByStrings(vector<string> data){
 }
 
 ostream& operator<<(ostream& os,  Waypoint& a){
-	os << a.getCountry()  << " " << a.getName()  << " " << a.getID() << " " << a.getLocalization().getLatitude() << " " << a.getLocalization().getLatitude();
+	os << a.getCountry()  << " " << a.getName()  << " " << a.getID() << " " << a.getLocalization().getLatitude() << " " << a.getLocalization().getLongitude();
 	return os;
 }

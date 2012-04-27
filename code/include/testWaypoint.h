@@ -71,7 +71,7 @@ public:
 		Waypoint a("Portugal","point2", "pt2",-3.234322, 1.445);
 		ostringstream aux;
 		aux << a;
-		ASSERT_EQUAL(aux.str(),"Portugal point2 pt2 -3.23432 -3.23432");
+		ASSERT_EQUAL(aux.str(),"Portugal point2 pt2 -3.23432 1.445");
 
 
 	}
