@@ -5,18 +5,21 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/Airport.cpp \
+../src/FlightAdvisor.cpp \
 ../src/LoadData.cpp \
 ../src/Waypoint.cpp \
 ../src/main.cpp 
 
 OBJS += \
 ./src/Airport.o \
+./src/FlightAdvisor.o \
 ./src/LoadData.o \
 ./src/Waypoint.o \
 ./src/main.o 
 
 CPP_DEPS += \
 ./src/Airport.d \
+./src/FlightAdvisor.d \
 ./src/LoadData.d \
 ./src/Waypoint.d \
 ./src/main.d 

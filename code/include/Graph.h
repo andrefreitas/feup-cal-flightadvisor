@@ -53,11 +53,11 @@ bool Vertex<T>::removeEdgeTo(Vertex<T> *d) {
 }
 
 template <class T>
-Vertex<T>::Vertex(T in): info(in), visited(false), num(0), low(0), path(NULL){}
+Vertex<T>::Vertex(T in): info(in), visited(false), num(0), low(0), path(0){}
 
 
 template <class T>
-Vertex<T>::Vertex(const Vertex<T> & in): info(in.info), visited(in.visited), num(in.num), low(in.low), path(NULL){}
+Vertex<T>::Vertex(const Vertex<T> & in): info(in.info), visited(in.visited), num(in.num), low(in.low), path(0){}
 
 template <class T>
 void Vertex<T>::addEdge(Vertex<T> *dest, double w) {

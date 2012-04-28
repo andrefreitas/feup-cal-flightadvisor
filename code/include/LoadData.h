@@ -23,7 +23,7 @@ public:
      * Create a graph from the files data
      * @return a graph of strings
      */
-    static Graph<string> createGraph();
+    static Graph<string> createGraph(string networkFileName,string airportsFileName, string waypointsFileName);
      /**
      * Reads a CSV file and returns a vector of lines. Each line is a vector of strings.
      * @param nameFile the file name

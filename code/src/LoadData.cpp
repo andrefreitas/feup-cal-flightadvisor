@@ -49,11 +49,11 @@ vector< vector<string> > LoadData::loadFile(string nameFile){
      
 }
 
-Graph<string> LoadData::createGraph(){
+Graph<string> LoadData::createGraph(string networkFileName,string airportsFileName, string waypointsFileName){
         
-        vector< vector<string> > network =LoadData::loadFile("data/network.csv");
-        vector< vector<string> > airports =LoadData::loadFile("data/airports.csv");
-        vector< vector<string> > waypoint =LoadData::loadFile("data/waypoints.csv");
+        vector< vector<string> > network =LoadData::loadFile(networkFileName);
+        vector< vector<string> > airports =LoadData::loadFile(airportsFileName);
+        vector< vector<string> > waypoint =LoadData::loadFile(waypointsFileName);
         
         
         Graph<string> networkGraph;
@@ -112,6 +112,7 @@ vector<Waypoint> LoadData::loadWaypoints(string nameFile){
 		catch(InvalidStringsSizeException){
 			cout << nameFile << ", line " << i+1 << ": invalid waypoint!\n";
 		}
+
 		LoadData::waypoints.push_back(*p);
 	}
 	return waypoints;
