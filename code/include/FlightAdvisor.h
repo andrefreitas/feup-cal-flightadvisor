@@ -18,9 +18,10 @@ class FlightAdvisor{
 	vector<Waypoint> waypoints;
 
 	// User Information
-	Airport source;
-	Airport destination;
+	string source;
+	string destination;
 	int userOption;
+	vector<vector<string> > routesCalculated;
 
 	// Files .csv with data
 	string networkFileName;
@@ -31,7 +32,12 @@ class FlightAdvisor{
 	void loadData();
 	void welcomeMessage();
 	void askOption();
+	void calculateRoutes();
 	void printRoutes();
+	bool checkAirportID(string ID);
+
+	// Routing functions
+	vector<string> getBestRoute(string source, string destination);
 public:
 	FlightAdvisor(string networkFileName,string airportsFileName, string waypointsFileName);
 	void run();

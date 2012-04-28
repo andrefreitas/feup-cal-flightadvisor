@@ -25,6 +25,10 @@ class Vertex {
 	int low;
 	Vertex<T>* path;
 
+	// Dijkstra
+	Vertex<T>* previous;
+	long double distance;
+
 public:
 	Vertex(T in);
 	Vertex(const Vertex<T> &v);
@@ -84,6 +88,7 @@ class Graph {
 	vector<Vertex<T> *> vertexSet;
 	void dfs(Vertex<T> *v, vector<T> &res) const;
 
+
 public:
 	bool addVertex(const T &in);
 	bool addEdge(const T &sourc, const T &dest, double w);
@@ -94,7 +99,7 @@ public:
 	int maxNewChildren(Vertex<T> *v, T &inf) const;
 	vector<Vertex<T> * > getVertexSet() const;
 	int getNumVertex() const;
-
+	void Dijkstra(T source);
 	void clone(Graph<T> &g);
 };
 
@@ -279,7 +284,56 @@ int Graph<T>::maxNewChildren(Vertex<T> *v, T &inf) const {
 	}
 	return maxChildren;
 }
+template <class T>
+void Graph<T>::Dijkstra(T source){
+	long double infinity=10e100;
 
+	// (1) Initializations
+	for (int unsigned i=0; i<vertexSet.size(); i++){
+		vertexSet[i]->distance=infinity;
+		if(vertexSet[i]->info==source) vertexSet[i]->distance=0;
+	}
+
+	// (2) Get unoptimized vertex
+	vector<Vertex<T> *> Q=getVertexSet();
+
+	// (3) Optimizes the vertex set
+	while(!Q.empty()){
+
+		// Get the vertex with the smallest distance
+		Vertex<T> *u=Q[0];
+		int uIndex;
+		for(int unsigned i=0; i<Q.size(); i++)
+			if ((Q[i]->distance) < (u->distance)){
+				u=Q[i];
+				uIndex=i;
+			}
+
+		// Check if infinity
+		if(u->distance==infinity) break;
+
+		// Remove the u
+		Q.erase(Q.begin()+uIndex);
+
+		// get neighbors of u
+		vector<Vertex<T>* > neighbor;
+		vector<long double> weights; // distance to that neighbour
+		for(int unsigned i=0; i<(u->adj.size()); i++){
+			neighbor.push_back((u->adj[i]).dest);
+			weights.push_back((u->adj[i]).weight);
+		}
+
+		// for each neighbor of u
+		for (int unsigned i=0; i<neighbor.size(); i++){
+			long double alt=u->distance + weights[i];
+			if(alt< u->distance){
+				neighbor[i]->distance=alt;
+				neighbor[i]->previous=u;
+			}
+		}
+	}
+
+}
 
 
 #endif /* GRAPH_H_ */
