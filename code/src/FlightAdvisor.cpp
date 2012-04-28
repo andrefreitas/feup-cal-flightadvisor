@@ -10,9 +10,10 @@ FlightAdvisor::FlightAdvisor(string networkFileName,string airportsFileName, str
 }
 
 void FlightAdvisor::loadData()  {
-	//network=LoadData::createGraph(networkFileName,airportsFileName,waypointsFileName);
-    airports=LoadData::loadAirports(airportsFileName);
-    waypoints=LoadData::loadWaypoints(waypointsFileName);
+	airports=LoadData::loadAirports(airportsFileName);
+	waypoints=LoadData::loadWaypoints(waypointsFileName);
+	network=LoadData::createGraph(networkFileName,airportsFileName,waypointsFileName);
+
 }
 void FlightAdvisor::run(){
 	welcomeMessage();
