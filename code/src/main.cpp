@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 {       
 
 	FlightAdvisor a("data/network.csv","data/airports.csv","data/waypoints.csv");
-	a.run();
+	//a.run();
     return 0;
     
 }

@@ -8,6 +8,8 @@ CPP_SRCS += \
 ../src/FlightAdvisor.cpp \
 ../src/LoadData.cpp \
 ../src/Waypoint.cpp \
+../src/connection.cpp \
+../src/graphviewer.cpp \
 ../src/main.cpp 
 
 OBJS += \
@@ -15,6 +17,8 @@ OBJS += \
 ./src/FlightAdvisor.o \
 ./src/LoadData.o \
 ./src/Waypoint.o \
+./src/connection.o \
+./src/graphviewer.o \
 ./src/main.o 
 
 CPP_DEPS += \
@@ -22,6 +26,8 @@ CPP_DEPS += \
 ./src/FlightAdvisor.d \
 ./src/LoadData.d \
 ./src/Waypoint.d \
+./src/connection.d \
+./src/graphviewer.d \
 ./src/main.d 
 
 

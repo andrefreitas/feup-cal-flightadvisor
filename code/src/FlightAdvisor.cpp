@@ -1,6 +1,8 @@
 #include "FlightAdvisor.h"
 #include "Graph.h"
 #include <stdlib.h>
+#include "graphviewer.h"
+#include <sstream>
 FlightAdvisor::FlightAdvisor(string networkFileName, string airportsFileName,
 		string waypointsFileName) {
 	// Save the file names
@@ -16,7 +18,7 @@ void FlightAdvisor::loadData() {
 	waypoints = LoadData::loadWaypoints(waypointsFileName);
 	network = LoadData::createGraph(networkFileName, airportsFileName,
 			waypointsFileName);
-
+	printNetwork();
 }
 void FlightAdvisor::run() {
 	welcomeMessage();
@@ -45,12 +47,13 @@ void FlightAdvisor::askOption() {
 	do {
 		cout << "> ";
 		getline(cin, input);
-	} while (input.size() != (unsigned int) 1 || (int)validOptions.find(input[0]) ==-1);
+	} while (input.size() != (unsigned int) 1
+			|| (int) validOptions.find(input[0]) == -1);
 	userOption = atoi(input.c_str());
 
 }
 
-void FlightAdvisor::calculateRoutes(){
+void FlightAdvisor::calculateRoutes() {
 	// Decide what to do
 	switch (userOption) {
 	case 1: {
@@ -73,9 +76,24 @@ void FlightAdvisor::printRoutes() {
 }
 
 vector<string> FlightAdvisor::getBestRoute(string source, string destination) {
+	// (1) use the dijkstra
 	Graph<string> tempGraph;
 	network.clone(tempGraph);
 	tempGraph.Dijkstra(source);
+
+	// (2) build the path
+	vector<string> path;
+	Vertex<string> *p;
+	vector<Vertex<string>*> vertexss = tempGraph.getVertexSet();
+
+	for (int unsigned i = 0; i < vertexss.size(); i++) {
+		cout << "[" << i << "] " << vertexss[i]->getInfo() << " " << vertexss[i]
+				<< " size: " << vertexss[i]->adj.size() << "previous: ";
+		cout << vertexss[i]->getPrevious() << endl;
+
+	}
+	cout << tempGraph.getVertexSet().size() << endl;
+	return path;
 }
 
 bool FlightAdvisor::checkAirportID(string ID) {
@@ -85,3 +103,33 @@ bool FlightAdvisor::checkAirportID(string ID) {
 	return false;
 }
 
+void FlightAdvisor::printNetwork() {
+	GraphViewer *gv = new GraphViewer(1000, 1000, true);
+	gv->createWindow(600, 600);
+	gv->defineVertexColor("blue");
+	gv->defineEdgeColor("black");
+
+
+	vector<Vertex<string>* > routes=network.getVertexSet();
+	// Create the nodes
+	for(int unsigned i=0; i<routes.size(); i++){
+		gv->addNode(i);
+		gv->setVertexLabel(i, routes[i]->getInfo());
+		routes[i]->gvNodeID=i;
+	}
+
+	// Create the edges
+	int unsigned edgeCounter=0;
+	for (int unsigned i=0; i<routes.size(); i++){
+		for (int unsigned j=0; j<routes[i]->adj.size(); j++){
+			gv->addEdge(edgeCounter++,routes[i]->gvNodeID, routes[i]->adj[j].getDest()->gvNodeID, EdgeType::UNDIRECTED);
+			stringstream ss;
+			ss << routes[i]->adj[j].getWeight() << " km" << endl;
+			gv->setEdgeLabel(edgeCounter-1,ss.str());
+		}
+	}
+
+
+	sleep(10);
+	gv->rearrange();
+}

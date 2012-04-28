@@ -36,6 +36,8 @@ class FlightAdvisor{
 	void printRoutes();
 	bool checkAirportID(string ID);
 
+	void printNetwork();
+
 	// Routing functions
 	vector<string> getBestRoute(string source, string destination);
 public:
