@@ -104,16 +104,37 @@ bool FlightAdvisor::checkAirportID(string ID) {
 }
 
 void FlightAdvisor::printNetwork() {
-	GraphViewer *gv = new GraphViewer(1000, 1000, true);
-	gv->createWindow(600, 600);
+	int mapwidth=1458;
+	int mapheight=947;
+	GraphViewer *gv = new GraphViewer(mapwidth, mapheight, false);
+	gv->setBackground("ibericMap.gif");
+	gv->createWindow(mapwidth, mapheight);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
 
 
 	vector<Vertex<string>* > routes=network.getVertexSet();
+	// get the lowest x
+	double lowestX=10000000000000;
+	double lowestY=10000000000000;
+	for(int unsigned i=0; i<routes.size(); i++){
+			long double lon= LoadData::getWayPointbyID(routes[i]->getInfo()).getLocalization().getLongitude();
+			long double lat= LoadData::getWayPointbyID(routes[i]->getInfo()).getLocalization().getLatitude();
+			double x = (180+lon) * (mapwidth / 360.0);
+			double y = (90-lat) * (mapheight / 180.0);
+			if(x<lowestX) lowestX=x;
+			if(y<lowestY) lowestY=y;
+	}
+	cout << "LowestX: " << lowestX << endl;
 	// Create the nodes
 	for(int unsigned i=0; i<routes.size(); i++){
-		gv->addNode(i);
+		long double lon= LoadData::getWayPointbyID(routes[i]->getInfo()).getLocalization().getLongitude();
+		long double lat= LoadData::getWayPointbyID(routes[i]->getInfo()).getLocalization().getLatitude();
+		double x = (180+lon) * (mapwidth / 360.0) -lowestX;
+		x=11*x+130;
+		double y = (90-lat) * (mapheight / 180.0)-lowestY;
+		y=11*y+95;
+		gv->addNode(i,x,y);
 		gv->setVertexLabel(i, routes[i]->getInfo());
 		routes[i]->gvNodeID=i;
 	}
@@ -130,6 +151,6 @@ void FlightAdvisor::printNetwork() {
 	}
 
 
-	sleep(10);
+	sleep(60);
 	gv->rearrange();
 }
