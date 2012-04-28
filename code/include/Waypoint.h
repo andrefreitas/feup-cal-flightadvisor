@@ -82,6 +82,7 @@ public:
 	virtual void setIATA(string iata){}
 	virtual void setICAO(string icao){}
 
+	virtual ~Waypoint(){};
 
 };
 

@@ -109,7 +109,7 @@ vector<Waypoint> LoadData::loadWaypoints(string nameFile){
 		try{
 			p->setByStrings(waypoint[i]);
 		}
-		catch(InvalidStringsSizeException){
+		catch(InvalidStringsSizeException &e){
 			cout << nameFile << ", line " << i+1 << ": invalid waypoint!\n";
 		}
 
@@ -130,7 +130,7 @@ vector<Airport> LoadData::loadAirports(string nameFile){
 		try{
 			p->setByStrings(airport[i]);
 		}
-		catch(InvalidStringsSizeException){
+		catch(InvalidStringsSizeException &a){
 			cout << nameFile << ", line " <<  i+1  << ": invalid airport!";
 				}
 		LoadData::airports.push_back(*p);
@@ -143,4 +143,6 @@ Waypoint LoadData::getWayPointbyID(string id){
 		if (waypoints[i].getID()==id) return waypoints[i];
 	for(int unsigned i=0; i<airports.size(); i++)
 			if (airports[i].getID()==id) return airports[i];
+
+	return Waypoint();
 }

@@ -36,13 +36,12 @@ class FlightAdvisor{
 	void printRoutes();
 	bool checkAirportID(string ID);
 
-	void printNetwork();
-
 	// Routing functions
 	vector<string> getBestRoute(string source, string destination);
 public:
 	FlightAdvisor(string networkFileName,string airportsFileName, string waypointsFileName);
 	void run();
+	void printNetwork();
 };
 
 

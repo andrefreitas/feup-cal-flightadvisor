@@ -350,7 +350,6 @@ void Graph<T>::Dijkstra(T source){
                 // Remove the u
                 Q.erase(Q.begin()+uIndex);
 
-                cout << "Passou aqui" << endl;
                 // get neighbors of u
                 vector<Vertex<T>* > neighbor;
                 vector<long double> weights; // distance to that neighbour

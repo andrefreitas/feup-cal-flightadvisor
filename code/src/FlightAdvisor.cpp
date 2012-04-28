@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "graphviewer.h"
 #include <sstream>
+
+
 FlightAdvisor::FlightAdvisor(string networkFileName, string airportsFileName,
 		string waypointsFileName) {
 	// Save the file names
@@ -18,7 +20,6 @@ void FlightAdvisor::loadData() {
 	waypoints = LoadData::loadWaypoints(waypointsFileName);
 	network = LoadData::createGraph(networkFileName, airportsFileName,
 			waypointsFileName);
-	printNetwork();
 }
 void FlightAdvisor::run() {
 	welcomeMessage();
@@ -26,6 +27,7 @@ void FlightAdvisor::run() {
 		askOption();
 		calculateRoutes();
 		printRoutes();
+;
 	} while (userOption != 0);
 }
 void FlightAdvisor::welcomeMessage() {
@@ -54,7 +56,6 @@ void FlightAdvisor::askOption() {
 }
 
 void FlightAdvisor::calculateRoutes() {
-	// Decide what to do
 	switch (userOption) {
 	case 1: {
 		do {
@@ -83,16 +84,6 @@ vector<string> FlightAdvisor::getBestRoute(string source, string destination) {
 
 	// (2) build the path
 	vector<string> path;
-	Vertex<string> *p;
-	vector<Vertex<string>*> vertexss = tempGraph.getVertexSet();
-
-	for (int unsigned i = 0; i < vertexss.size(); i++) {
-		cout << "[" << i << "] " << vertexss[i]->getInfo() << " " << vertexss[i]
-				<< " size: " << vertexss[i]->adj.size() << "previous: ";
-		cout << vertexss[i]->getPrevious() << endl;
-
-	}
-	cout << tempGraph.getVertexSet().size() << endl;
 	return path;
 }
 
@@ -104,17 +95,19 @@ bool FlightAdvisor::checkAirportID(string ID) {
 }
 
 void FlightAdvisor::printNetwork() {
+	// (1) Setup the Window
 	int mapwidth=1458;
 	int mapheight=947;
 	GraphViewer *gv = new GraphViewer(mapwidth, mapheight, false);
-	gv->setBackground("ibericMap.gif");
-	gv->createWindow(mapwidth, mapheight);
+	gv->setBackground("data/ibericMap.gif");
+	gv->createWindow(mapwidth-400, mapheight);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
 
-
+	// (2) Get the network of waypoints
 	vector<Vertex<string>* > routes=network.getVertexSet();
-	// get the lowest x
+
+	// (3) Get the lowest x and y for adjusting the graph in the map
 	double lowestX=10000000000000;
 	double lowestY=10000000000000;
 	for(int unsigned i=0; i<routes.size(); i++){
@@ -125,21 +118,24 @@ void FlightAdvisor::printNetwork() {
 			if(x<lowestX) lowestX=x;
 			if(y<lowestY) lowestY=y;
 	}
-	cout << "LowestX: " << lowestX << endl;
-	// Create the nodes
+
+
+	// (4) Create the nodes
 	for(int unsigned i=0; i<routes.size(); i++){
+		// Calculate x and y axis position
 		long double lon= LoadData::getWayPointbyID(routes[i]->getInfo()).getLocalization().getLongitude();
 		long double lat= LoadData::getWayPointbyID(routes[i]->getInfo()).getLocalization().getLatitude();
 		double x = (180+lon) * (mapwidth / 360.0) -lowestX;
 		x=11*x+130;
 		double y = (90-lat) * (mapheight / 180.0)-lowestY;
 		y=11*y+95;
+		// Create the node
 		gv->addNode(i,x,y);
 		gv->setVertexLabel(i, routes[i]->getInfo());
 		routes[i]->gvNodeID=i;
 	}
 
-	// Create the edges
+	// (5) Create the edges
 	int unsigned edgeCounter=0;
 	for (int unsigned i=0; i<routes.size(); i++){
 		for (int unsigned j=0; j<routes[i]->adj.size(); j++){
@@ -150,7 +146,7 @@ void FlightAdvisor::printNetwork() {
 		}
 	}
 
-
+	// (6) Wait before closing
 	sleep(60);
 	gv->rearrange();
 }

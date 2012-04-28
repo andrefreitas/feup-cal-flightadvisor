@@ -53,7 +53,7 @@ public:
 
 	//! Evaluates if is an airport
 	bool isAirport();
-
+	virtual ~Airport(){};
 
 };
 //! Invalid IATA exception class

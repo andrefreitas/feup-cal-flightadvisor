@@ -1,9 +1,4 @@
 src/main.d: ../src/main.cpp \
- /home/andre/git/cal-flight-advisor/code/include/LoadData.h \
- /home/andre/git/cal-flight-advisor/code/include/Graph.h \
- /home/andre/git/cal-flight-advisor/code/include/Waypoint.h \
- /home/andre/git/cal-flight-advisor/code/include/Localization.h \
- /home/andre/git/cal-flight-advisor/code/include/Airport.h \
  /home/andre/git/cal-flight-advisor/code/include/testAirport.h \
  /home/andre/git/cal-flight-advisor/code/cute/cute.h \
  /home/andre/git/cal-flight-advisor/code/cute/cute_base.h \
@@ -222,21 +217,13 @@ src/main.d: ../src/main.cpp \
  /home/andre/git/cal-flight-advisor/code/cute/cute_listener.h \
  /home/andre/git/cal-flight-advisor/code/cute/vstudio_listener.h \
  /home/andre/git/cal-flight-advisor/code/cute/cute_runner.h \
- /home/andre/git/cal-flight-advisor/code/include/testWaypoint.h \
  /home/andre/git/cal-flight-advisor/code/include/Airport.h \
+ /home/andre/git/cal-flight-advisor/code/include/Localization.h \
  /home/andre/git/cal-flight-advisor/code/include/Waypoint.h \
+ /home/andre/git/cal-flight-advisor/code/include/testWaypoint.h \
  /home/andre/git/cal-flight-advisor/code/include/FlightAdvisor.h \
+ /home/andre/git/cal-flight-advisor/code/include/Graph.h \
  /home/andre/git/cal-flight-advisor/code/include/LoadData.h
-
-/home/andre/git/cal-flight-advisor/code/include/LoadData.h:
-
-/home/andre/git/cal-flight-advisor/code/include/Graph.h:
-
-/home/andre/git/cal-flight-advisor/code/include/Waypoint.h:
-
-/home/andre/git/cal-flight-advisor/code/include/Localization.h:
-
-/home/andre/git/cal-flight-advisor/code/include/Airport.h:
 
 /home/andre/git/cal-flight-advisor/code/include/testAirport.h:
 
@@ -674,12 +661,16 @@ src/main.d: ../src/main.cpp \
 
 /home/andre/git/cal-flight-advisor/code/cute/cute_runner.h:
 
-/home/andre/git/cal-flight-advisor/code/include/testWaypoint.h:
-
 /home/andre/git/cal-flight-advisor/code/include/Airport.h:
+
+/home/andre/git/cal-flight-advisor/code/include/Localization.h:
 
 /home/andre/git/cal-flight-advisor/code/include/Waypoint.h:
 
+/home/andre/git/cal-flight-advisor/code/include/testWaypoint.h:
+
 /home/andre/git/cal-flight-advisor/code/include/FlightAdvisor.h:
+
+/home/andre/git/cal-flight-advisor/code/include/Graph.h:
 
 /home/andre/git/cal-flight-advisor/code/include/LoadData.h:
