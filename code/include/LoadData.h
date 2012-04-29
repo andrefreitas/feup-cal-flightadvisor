@@ -53,5 +53,14 @@ public:
     openFileException(){};
 
 };
-
+class notConnectedGraphException{
+	string waypoint;
+public:
+	notConnectedGraphException(string waypoint){
+		this->waypoint=waypoint;
+	}
+	string getWaypointWithoutEdges(){
+		return waypoint;
+	}
+};
 #endif

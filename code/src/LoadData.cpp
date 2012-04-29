@@ -76,6 +76,7 @@ Graph<string> LoadData::createGraph(string networkFileName,string airportsFileNa
         
         vector<Vertex<string> *> test = networkGraph.getVertexSet();
 
+        // Create edges
        for (int unsigned i = 0; i < network.size(); i++)
         {
             for (int unsigned j = 1; j < network[i].size()-1; j++)
@@ -91,6 +92,15 @@ Graph<string> LoadData::createGraph(string networkFileName,string airportsFileNa
 
             }
         }
+
+       // check if is a connected graph
+       vector<Vertex<string> *> graphVertex;
+       graphVertex=networkGraph.getVertexSet();
+
+       for(int unsigned i=0; i<graphVertex.size();i++){
+    	   if(graphVertex[i]->adj.size()==0) throw  notConnectedGraphException(graphVertex[i]->getInfo());
+       }
+
         return networkGraph;
     }
 

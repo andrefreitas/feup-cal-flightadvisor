@@ -18,8 +18,14 @@ FlightAdvisor::FlightAdvisor(string networkFileName, string airportsFileName,
 void FlightAdvisor::loadData() {
 	airports = LoadData::loadAirports(airportsFileName);
 	waypoints = LoadData::loadWaypoints(waypointsFileName);
+	try{
 	network = LoadData::createGraph(networkFileName, airportsFileName,
 			waypointsFileName);
+	}
+	catch(notConnectedGraphException &e){
+		cout << "The network is not connected! The waypoint " << e.getWaypointWithoutEdges() << " don't have edges!" << endl;
+		   exit(1);
+	}
 }
 void FlightAdvisor::run() {
 	welcomeMessage();
@@ -130,15 +136,17 @@ void FlightAdvisor::printNetwork() {
 			if(y<lowestY) lowestY=y;
 	}
 
-
+	//cout << "x:" << lowestX << "y: " << lowestY << endl;
+	double fixedLowestXforEuropeMap=692.003;
+	double fixedLowestYforEuropeMap=207.481;
 	// (4) Create the nodes
 	for(int unsigned i=0; i<routes.size(); i++){
 		// Calculate x and y axis position
 		long double lon= LoadData::getWayPointbyID(routes[i]->getInfo()).getLocalization().getLongitude();
 		long double lat= LoadData::getWayPointbyID(routes[i]->getInfo()).getLocalization().getLatitude();
-		double x = (180+lon) * (mapwidth / 360.0) -lowestX;
+		double x = (180+lon) * (mapwidth / 360.0) -fixedLowestXforEuropeMap;
 		x=11*x+130;
-		double y = (90-lat) * (mapheight / 180.0)-lowestY;
+		double y = (90-lat) * (mapheight / 180.0)-fixedLowestYforEuropeMap;
 		y=11*y+95;
 		// Create the node
 		gv->addNode(i,x,y);
