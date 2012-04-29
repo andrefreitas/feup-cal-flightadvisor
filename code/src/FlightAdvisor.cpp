@@ -191,7 +191,7 @@ void FlightAdvisor::printNetwork() {
 	int mapwidth = 1458;
 	int mapheight = 947;
 	gv = new GraphViewer(mapwidth, mapheight, false);
-	gv->setBackground("data/ibericMap.gif");
+	gv->setBackground("data/ibericMapFA.gif");
 	gv->createWindow(mapwidth - 400, mapheight);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
@@ -266,6 +266,7 @@ int FlightAdvisor::getGVEdgeID(int node1ID, int node2ID){
 
 void FlightAdvisor::runArgsMode(int argc,char *argv[]){
 	// Only source
+	printNetwork();
 	if(argc==2){
 		userOption=2;
 		source=toString(argv[1]);
@@ -293,6 +294,8 @@ void FlightAdvisor::runArgsMode(int argc,char *argv[]){
 		}
 		routesCalculated.push_back(getBestRoute(source, destination));
 	}
+
 	printRoutes();
+	sleep(30);
 
 }
