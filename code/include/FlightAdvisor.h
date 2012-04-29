@@ -44,7 +44,9 @@ class FlightAdvisor{
 
 	// Graphviewer
 	GraphViewer *gv ;
+	vector<vector<int> > edgesIDs; // each member of this vector is ex: edgeID, nodeID1, nodeID2
 	void resetGVAspect();
+	int getGVEdgeID(int node1ID, int node2ID);
 public:
 	FlightAdvisor(string networkFileName,string airportsFileName, string waypointsFileName);
 	void run();

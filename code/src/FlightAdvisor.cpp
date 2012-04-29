@@ -116,9 +116,7 @@ void FlightAdvisor::printRoutes() {
 	if(userOption==1){
 		resetGVAspect();
 		int unsigned i;
-		for (i=0; i<routesCalculated[0].size(); i++){
-			gv->setVertexColor(network.getVertex(routesCalculated[0][i])->gvNodeID,"green");
-		}
+		for (i=0; i<routesCalculated[0].size(); i++) gv->setVertexColor(network.getVertex(routesCalculated[0][i])->gvNodeID,"green");
 		gv->setVertexColor(network.getVertex(routesCalculated[0][0])->gvNodeID,"red");
 		gv->setVertexColor(network.getVertex(routesCalculated[0][i-1])->gvNodeID,"red");
 		gv->rearrange();
@@ -241,6 +239,13 @@ void FlightAdvisor::printNetwork() {
 	int unsigned edgeCounter = 0;
 	for (int unsigned i = 0; i < routes.size(); i++) {
 		for (int unsigned j = 0; j < routes[i]->adj.size(); j++) {
+			// Retain information for further handling
+			vector<int> pairNodeIDs;
+			pairNodeIDs.push_back(edgeCounter+1);
+			pairNodeIDs.push_back(routes[i]->gvNodeID);
+			pairNodeIDs.push_back(routes[i]->adj[j].getDest()->gvNodeID);
+			edgesIDs.push_back(pairNodeIDs);
+			// Create the edge
 			gv->addEdge(edgeCounter++, routes[i]->gvNodeID,
 					routes[i]->adj[j].getDest()->gvNodeID,
 					EdgeType::UNDIRECTED);
@@ -250,6 +255,13 @@ void FlightAdvisor::printNetwork() {
 		}
 	}
 
+}
+
+int FlightAdvisor::getGVEdgeID(int node1ID, int node2ID){
+	for (int unsigned i=0; i<edgesIDs.size(); i++){
+		if(((edgesIDs[i][1]==node1ID) & (edgesIDs[i][2]==node2ID)) || ((edgesIDs[i][2]==node1ID) & (edgesIDs[i][1]==node2ID))) return edgesIDs[i][0];
+	}
+	return -1;
 }
 
 void FlightAdvisor::runArgsMode(int argc,char *argv[]){
