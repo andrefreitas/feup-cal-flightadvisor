@@ -56,6 +56,7 @@ void FlightAdvisor::askOption() {
 }
 
 void FlightAdvisor::calculateRoutes() {
+	routesCalculated.clear();
 	switch (userOption) {
 	case 1: {
 		do {
@@ -148,5 +149,5 @@ void FlightAdvisor::printNetwork() {
 
 	// (6) Wait before closing
 	sleep(60);
-	gv->rearrange();
+
 }
