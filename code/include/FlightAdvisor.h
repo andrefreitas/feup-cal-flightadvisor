@@ -38,6 +38,8 @@ class FlightAdvisor{
 
 	// Routing functions
 	vector<string> getBestRoute(string source, string destination);
+	vector<vector<string> > getBestRoutes(string source);
+	vector<vector<string> > getAllRoutes();
 public:
 	FlightAdvisor(string networkFileName,string airportsFileName, string waypointsFileName);
 	void run();

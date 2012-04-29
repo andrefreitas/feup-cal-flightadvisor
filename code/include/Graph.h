@@ -195,6 +195,9 @@ public:
 	int edgeCost(int vOrigIndex, int vDestIndex);
 	vector<T> getfloydWarshallPath(const T &origin, const T &dest);
 	void getfloydWarshallPathAux(int index1, int index2, vector<T> & res);
+
+	// Flightadvisor
+	bool havePathsWithSameSize(const T &o, const T &d);
 };
 
 //---
@@ -620,6 +623,7 @@ void Graph<T>::unweightedShortestPath(const T &s) {
 			Vertex<T>* w = v->adj[i].dest;
 			if( w->dist == INT_INFINITY ) {
 				w->dist = v->dist + 1;
+				if(w->path!=0) cout << "Já existia";
 				w->path = v;
 				q.push(w);
 			}
@@ -766,10 +770,38 @@ void Graph<T>::floydWarshallShortestPath() {
 
 
 }
+template <class T>
+vector<T> bestPathUnweighted(Graph<T> *graph,const T &o, const T &d){
+	Graph<T> tempGraph;
+	graph->clone(tempGraph);
+	tempGraph.unweightedShortestPath(o);
+	vector<T> path;
+	Vertex<T> *p=tempGraph.getVertex(d);
+	while(p->getInfo()!=o){
+		path.insert(path.begin(), p->getInfo());
+		p=p->path;
+	}
+	path.insert(path.begin(),o);
+	return path;
+}
 
+template<class T>
+bool Graph<T>::havePathsWithSameSize(const T &o, const T &d){
 
+	vector<T> bestPath=bestPathUnweighted(this,o,d);
 
+	// Brute force solution
+	for(int unsigned i=1; i<(bestPath.size()-1); i++){
+		Graph<T> tempGraph;
+		this->clone(tempGraph);
+		tempGraph.removeVertex(bestPath[i]);
+		vector <T> tempBestPath=bestPathUnweighted(&tempGraph,o,d);
+		if(tempBestPath.size()==bestPath.size()) return true;
 
+	}
+
+	return false;
+}
 
 
 
