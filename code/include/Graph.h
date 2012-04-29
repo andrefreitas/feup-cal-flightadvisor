@@ -8,6 +8,7 @@
 #include <queue>
 #include <list>
 #include <limits>
+#include <climits>
 #include <cmath>
 #include <cstddef>
 #include <iostream>
@@ -20,7 +21,7 @@ template <class T> class Graph;
 const int NOT_VISITED = 0;
 const int BEING_VISITED = 1;
 const int DONE_VISITED = 2;
-const int INT_INFINITY = 1000000000;
+const int INT_INFINITY = INT_MAX;
 
 /*
  * ================================================================================================

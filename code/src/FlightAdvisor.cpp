@@ -83,6 +83,16 @@ vector<string> FlightAdvisor::getBestRoute(string source, string destination) {
 	network.clone(tempGraph);
 	tempGraph.Dijkstra(source);
 
+	// (2) Debug
+	vector<Vertex<string>* > vertexs;
+	vertexs=tempGraph.getVertexSet();
+	cout << "Cout " << vertexs.size() << endl;
+	for(int unsigned i=0; i<vertexs.size(); i++){
+		cout << "No: " << vertexs[i]->getInfo() << "Edgessize: " << vertexs[i]->adj.size() << " Path: ";
+		if(vertexs[i]->path!=0) cout << vertexs[i]->path->getInfo();
+		cout << endl;
+	}
+	printNetwork();
 	// (2) build the path
 	vector<string> path;
 	return path;

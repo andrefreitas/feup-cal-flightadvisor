@@ -75,7 +75,7 @@ Graph<string> LoadData::createGraph(string networkFileName,string airportsFileNa
         }
         
         vector<Vertex<string> *> test = networkGraph.getVertexSet();
-        // Todo: Existe aqui um problema de limites
+
        for (int unsigned i = 0; i < network.size(); i++)
         {
             for (int unsigned j = 1; j < network[i].size()-1; j++)
@@ -87,6 +87,7 @@ Graph<string> LoadData::createGraph(string networkFileName,string airportsFileNa
                 long double distance=Localization::distance(prev.getLocalization(),nex.getLocalization());
                 //cout << prev << " => " << nex << ": distance= " <<distance << endl;
                 networkGraph.addEdge(previous, next, distance);
+                networkGraph.addEdge(next,previous,  distance);
 
             }
         }
