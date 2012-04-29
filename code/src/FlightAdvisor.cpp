@@ -79,8 +79,9 @@ void FlightAdvisor::calculateRoutes() {
 		routesCalculated.push_back(getBestRoute(source, destination));
 	else if (userOption == 2)
 		routesCalculated = getBestRoutes(source);
-	else
+	else{
 		routesCalculated = getAllRoutes();
+	}
 
 }
 
