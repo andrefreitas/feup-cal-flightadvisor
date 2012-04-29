@@ -58,37 +58,30 @@ void FlightAdvisor::askOption() {
 	} while (input.size() != (unsigned int) 1
 			|| (int) validOptions.find(input[0]) == -1);
 	userOption = atoi(input.c_str());
+	if ((userOption == 2) | (userOption==1)) {
+		do {
+			cout << "Source: ";
+			getline(cin, source);
+		} while (!checkAirportID(source));
+	}
+	if (userOption == 1) {
+		do {
+			cout << "Destination: ";
+			getline(cin, destination);
+		} while (!checkAirportID(destination));
+	}
 
 }
 
 void FlightAdvisor::calculateRoutes() {
 	routesCalculated.clear();
-	switch (userOption) {
-	case 1: {
-		do {
-			cout << "Source: ";
-			getline(cin, source);
-		} while (!checkAirportID(source));
-		do {
-			cout << "Destination: ";
-			getline(cin, destination);
-		} while (!checkAirportID(destination));
+	if (userOption == 1)
 		routesCalculated.push_back(getBestRoute(source, destination));
-	}
-		break;
+	else if (userOption == 2)
+		routesCalculated = getBestRoutes(source);
+	else
+		routesCalculated = getAllRoutes();
 
-	case 2: {
-		do {
-			cout << "Source: ";
-			getline(cin, source);
-		} while (!checkAirportID(source));
-		routesCalculated=getBestRoutes(source);
-
-	}
-		break;
-	case 3:
-		routesCalculated=getAllRoutes(); break;
-	}
 }
 
 void FlightAdvisor::printRoutes() {
@@ -113,11 +106,13 @@ vector<string> FlightAdvisor::getBestRoute(string source, string destination) {
 	Graph<string> tempGraph;
 	network.clone(tempGraph);
 	if (tempGraph.havePathsWithSameSize(source, destination)) {
-		cout << "\nUsed best path by number of nodes" << endl;
+		if (userOption == 1)
+			cout << "\nUsed best path by distance" << endl;
 		tempGraph.Dijkstra(source);
 	} else {
 		tempGraph.unweightedShortestPath(source);
-		cout << "\nUsed best path by distance" << endl;
+		if (userOption == 1)
+			cout << "\nUsed best path by number of nodes" << endl;
 	}
 
 	// (2) build the path
@@ -143,11 +138,11 @@ vector<vector<string> > FlightAdvisor::getBestRoutes(string source) {
 vector<vector<string> > FlightAdvisor::getAllRoutes() {
 	vector<vector<string> > routes;
 	for (int unsigned i = 0; i < airports.size(); i++) {
-		vector<vector<string> > aux;
-		aux = getBestRoutes(airports[i].getID());
-		for (int unsigned j = 0; j < aux.size(); j++) {
-			routes.push_back(aux[i]);
+		vector<vector<string> > aux= getBestRoutes(airports[i].getID());
+		for (int unsigned j=0; j<aux.size(); j++){
+			routes.push_back(aux[j]);
 		}
+
 	}
 	return routes;
 }

@@ -787,19 +787,21 @@ vector<T> bestPathUnweighted(Graph<T> *graph,const T &o, const T &d){
 
 template<class T>
 bool Graph<T>::havePathsWithSameSize(const T &o, const T &d){
-
+	return true;
 	vector<T> bestPath=bestPathUnweighted(this,o,d);
-
+	//return true;
 	// Brute force solution
 	for(int unsigned i=1; i<(bestPath.size()-1); i++){
 		Graph<T> tempGraph;
 		this->clone(tempGraph);
 		tempGraph.removeVertex(bestPath[i]);
+
 		vector <T> tempBestPath=bestPathUnweighted(&tempGraph,o,d);
+		cout << "Passou aqui" << endl;
 		if(tempBestPath.size()==bestPath.size()) return true;
 
 	}
-
+	cout << "passou " << endl;
 	return false;
 }
 
