@@ -1,9 +1,21 @@
 #include "FlightAdvisor.h"
 #include "Graph.h"
 #include <stdlib.h>
-#include "graphviewer.h"
-#include <sstream>
 
+#include <sstream>
+#include <cctype>
+string toString(char *s){
+	stringstream ss;
+	for(int unsigned i=0; *(s+i)!='\0';i++){
+		ss << *(s+i );
+	}
+	return ss.str();
+}
+void toUpperString(string &s){
+	for(int unsigned i=0; i<s.size();i++){
+		s[i]=toupper(s[i]);
+	}
+}
 FlightAdvisor::FlightAdvisor(string networkFileName, string airportsFileName,
 		string waypointsFileName) {
 	// Save the file names
@@ -33,7 +45,6 @@ void FlightAdvisor::run() {
 		askOption();
 		calculateRoutes();
 		printRoutes();
-		;
 	} while (userOption != 0);
 }
 void FlightAdvisor::welcomeMessage() {
@@ -62,14 +73,17 @@ void FlightAdvisor::askOption() {
 		do {
 			cout << "Source: ";
 			getline(cin, source);
+			toUpperString(source);
 		} while (!checkAirportID(source));
 	}
 	if (userOption == 1) {
 		do {
 			cout << "Destination: ";
 			getline(cin, destination);
+			toUpperString(destination);
 		} while (!checkAirportID(destination));
 	}
+	if(userOption==0) exit(0);
 
 }
 
@@ -86,35 +100,54 @@ void FlightAdvisor::calculateRoutes() {
 }
 
 void FlightAdvisor::printRoutes() {
-	cout << "\nBest Path";
-	if (routesCalculated.size() > 1)
-		cout << "s";
-	cout << ":\n";
+
+	// Standard output
 	for (int unsigned i = 0; i < routesCalculated.size(); i++) {
 
 		for (int unsigned j = 0; j < routesCalculated[i].size(); j++) {
 			cout << routesCalculated[i][j];
 			if (j != (routesCalculated[i].size() - 1))
-				cout << " -> ";
+				cout << " ";
 		}
 		cout << "\n\n";
 	}
 
+	// GraphViewer
+	if(userOption==1){
+		resetGVAspect();
+		int unsigned i;
+		for (i=0; i<routesCalculated[0].size(); i++){
+			gv->setVertexColor(network.getVertex(routesCalculated[0][i])->gvNodeID,"green");
+		}
+		gv->setVertexColor(network.getVertex(routesCalculated[0][0])->gvNodeID,"red");
+		gv->setVertexColor(network.getVertex(routesCalculated[0][i-1])->gvNodeID,"red");
+		gv->rearrange();
+	}
+
+}
+
+void FlightAdvisor::resetGVAspect(){
+	vector<Vertex<string> *> vertexs=network.getVertexSet();
+	for(int unsigned i=0; i<vertexs.size(); i++){
+		gv->setVertexColor(vertexs[i]->gvNodeID,"blue");
+	}
+
+
 }
 
 vector<string> FlightAdvisor::getBestRoute(string source, string destination) {
-	// (1) use the dijkstra
+	// (1) choose the best algorithm
 	Graph<string> tempGraph;
 	network.clone(tempGraph);
 	if (tempGraph.havePathsWithSameSize(source, destination)) {
-		if (userOption == 1)
-			cout << "\nUsed best path by distance" << endl;
+		/*if (userOption == 1)
+			cout << "\nUsed best path by distance" << endl; */
 		tempGraph.Dijkstra(source);
 	} else {
 		tempGraph.unweightedShortestPath(source);
-		if (userOption == 1)
-			cout << "\nUsed best path by number of nodes" << endl;
-	}
+		/*if (userOption == 1)
+			cout << "\nUsed best path by number of nodes" << endl; */
+	};
 
 	// (2) build the path
 	vector<string> path;
@@ -137,6 +170,7 @@ vector<vector<string> > FlightAdvisor::getBestRoutes(string source) {
 }
 
 vector<vector<string> > FlightAdvisor::getAllRoutes() {
+	cout << "This is going to take a while, please wait...\n";
 	vector<vector<string> > routes;
 	for (int unsigned i = 0; i < airports.size(); i++) {
 		vector<vector<string> > aux= getBestRoutes(airports[i].getID());
@@ -158,7 +192,7 @@ void FlightAdvisor::printNetwork() {
 	// (1) Setup the Window
 	int mapwidth = 1458;
 	int mapheight = 947;
-	GraphViewer *gv = new GraphViewer(mapwidth, mapheight, false);
+	gv = new GraphViewer(mapwidth, mapheight, false);
 	gv->setBackground("data/ibericMap.gif");
 	gv->createWindow(mapwidth - 400, mapheight);
 	gv->defineVertexColor("blue");
@@ -186,7 +220,7 @@ void FlightAdvisor::printNetwork() {
 	//cout << "x:" << lowestX << "y: " << lowestY << endl;
 	double fixedLowestXforEuropeMap = 692.003;
 	double fixedLowestYforEuropeMap = 207.481;
-	// (4) Create the nodes
+	// (4) Create the nodesroutesCalculated.push_back(getBestRoute(source, destination));
 	for (int unsigned i = 0; i < routes.size(); i++) {
 		// Calculate x and y axis position
 		long double lon =
@@ -215,5 +249,38 @@ void FlightAdvisor::printNetwork() {
 			gv->setEdgeLabel(edgeCounter - 1, ss.str());
 		}
 	}
+
+}
+
+void FlightAdvisor::runArgsMode(int argc,char *argv[]){
+	// Only source
+	if(argc==2){
+		userOption=2;
+		source=toString(argv[1]);
+		toUpperString(source);
+		if(!checkAirportID(source)){
+			cout << "Invalid source \"" << source <<"\"\n";
+			exit(1);
+		}
+		routesCalculated = getBestRoutes(source);
+	}
+	// Source and Destination
+	else if(argc==3){
+		userOption=1;
+		source=toString(argv[1]);
+		toUpperString(source);
+		if(!checkAirportID(source)){
+			cout << "Invalid source \"" << source <<"\"\n";
+			exit(1);
+		}
+		destination=toString(argv[2]);
+		toUpperString(destination);
+		if(!checkAirportID(destination)){
+			cout << "Invalid destination\"" << destination <<"\"\n";
+			exit(1);
+		}
+		routesCalculated.push_back(getBestRoute(source, destination));
+	}
+	printRoutes();
 
 }
