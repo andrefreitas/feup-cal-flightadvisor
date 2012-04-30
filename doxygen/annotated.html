@@ -7,14 +7,9 @@
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript">
-  $(document).ready(initResizable);
-</script>
+
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
@@ -81,19 +76,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     </ul>
   </div>
 </div>
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-  initNavTree('annotated.html','');
-</script>
-<div id="doc-content">
 <div class="header">
   <div class="headertitle">
 <div class="title">Class List</div>  </div>
@@ -102,15 +84,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock">Here are the classes, structs, unions and interfaces with brief descriptions:</div><table>
   <tr><td class="indexkey"><a class="el" href="class_airport.html">Airport</a></td><td class="indexvalue">A class for an <a class="el" href="class_airport.html" title="A class for an Airport with it&#39;s basic information.">Airport</a> with it's basic information </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_flight_advisor.html">FlightAdvisor</a></td><td class="indexvalue">A class for describing a program that chooses the best routes according the source and destination airport </td></tr>
-  <tr><td class="indexkey"><a class="el" href="class_invalid_edge_exception.html">InvalidEdgeException</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey"><a class="el" href="class_invalid_edge_exception.html">InvalidEdgeException</a></td><td class="indexvalue">A class that is thrown when an invalid edge is created </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_invalid_file_name_exception.html">InvalidFileNameException</a></td><td class="indexvalue">A class for handling filenames that doesn't exist </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_invalid_i_a_t_a_exception.html">InvalidIATAException</a></td><td class="indexvalue">Invalid IATA exception class </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_invalid_i_c_a_o_exception.html">InvalidICAOException</a></td><td class="indexvalue">Invalid ICAO exception class </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_invalid_strings_size_exception.html">InvalidStringsSizeException</a></td><td class="indexvalue">Invalid Strings size exception class </td></tr>
-  <tr><td class="indexkey"><a class="el" href="class_load_data.html">LoadData</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey"><a class="el" href="class_load_data.html">LoadData</a></td><td class="indexvalue"><a class="el" href="class_load_data.html" title="LoadData - A class for loading graph flight routes data from CSV files.">LoadData</a> - A class for loading graph flight routes data from CSV files </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_localization.html">Localization</a></td><td class="indexvalue">This classe defines a position in earth by latitude and longitude </td></tr>
-  <tr><td class="indexkey"><a class="el" href="classnot_connected_graph_exception.html">notConnectedGraphException</a></td><td class="indexvalue"></td></tr>
-  <tr><td class="indexkey"><a class="el" href="classopen_file_exception.html">openFileException</a></td><td class="indexvalue"></td></tr>
+  <tr><td class="indexkey"><a class="el" href="classnot_connected_graph_exception.html">notConnectedGraphException</a></td><td class="indexvalue">A class that is thrown when a not connected graph is created </td></tr>
+  <tr><td class="indexkey"><a class="el" href="classopen_file_exception.html">openFileException</a></td><td class="indexvalue">A class for handling file opening exceptions </td></tr>
   <tr><td class="indexkey"><a class="el" href="classtest_airport.html">testAirport</a></td><td class="indexvalue">A class for testing the class <a class="el" href="class_airport.html" title="A class for an Airport with it&#39;s basic information.">Airport</a> </td></tr>
   <tr><td class="indexkey"><a class="el" href="classtest_waypoint.html">testWaypoint</a></td><td class="indexvalue">A class for testing the class <a class="el" href="class_waypoint.html" title="A waypoint is a determinated spot in a route that a plane must pass.">Waypoint</a> </td></tr>
   <tr><td class="indexkey"><a class="el" href="class_waypoint.html">Waypoint</a></td><td class="indexvalue">A waypoint is a determinated spot in a route that a plane must pass </td></tr>
@@ -130,16 +112,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-</div>
-  <div id="nav-path" class="navpath">
-    <ul>
 
-    <li class="footer">Generated on Mon Apr 30 2012 03:27:42 for Flight Advisor by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
-   </ul>
- </div>
 
+<hr class="footer"/><address class="footer"><small>
+Generated on Mon Apr 30 2012 11:31:48 for Flight Advisor by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.7.6.1
+</small></address>
 
 </body>
 </html>
