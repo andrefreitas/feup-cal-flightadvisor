@@ -82,6 +82,11 @@ public:
 	//! Run the FlightAdvisor in the arg mode. ex: flightadvisor LPPT LPPR
 	void runArgsMode(int argc,char *argv[]);
 };
-
-
+//! Class InvalidFileNameException - a class for handling filenames that doesn't exist
+class InvalidFileNameException{
+	string fileName;
+public:
+	InvalidFileNameException(string fileName):fileName(fileName){};
+	string getFileName(){ return fileName; };
+};
 #endif /* FLIGHTADVISOR_H_ */

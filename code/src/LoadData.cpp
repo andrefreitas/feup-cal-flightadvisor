@@ -76,8 +76,8 @@ Graph<string> LoadData::createGraph(string networkFileName,
 			long double distance = Localization::distance(
 					prev.getLocalization(), nex.getLocalization());
 			//cout << prev << " => " << nex << ": distance= " <<distance << endl;
-			networkGraph.addEdge(previous, next, distance);
-			networkGraph.addEdge(next, previous, distance);
+			if(!networkGraph.addEdge(previous, next, distance)) throw InvalidEdgeException(previous, next);
+			if(!networkGraph.addEdge(next, previous, distance)) throw InvalidEdgeException(previous, next);
 
 		}
 	}

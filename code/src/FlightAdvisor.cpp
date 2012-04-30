@@ -17,13 +17,20 @@ void toUpperString(string &s) {
 		s[i] = toupper(s[i]);
 	}
 }
-
+bool fileExists(string filename)
+{
+  ifstream ifile(filename.c_str());
+  return ifile;
+}
 // Methods definition
 FlightAdvisor::FlightAdvisor(string networkFileName, string airportsFileName,
 		string waypointsFileName) {
 	// Save the file names
+	if (!fileExists(networkFileName)) throw InvalidFileNameException(networkFileName);
 	this->networkFileName = networkFileName;
+	if (!fileExists(airportsFileName)) throw InvalidFileNameException( airportsFileName);
 	this->airportsFileName = airportsFileName;
+	if (!fileExists(waypointsFileName)) throw InvalidFileNameException(waypointsFileName);
 	this->waypointsFileName = waypointsFileName;
 	// Load all the necessary data
 	loadData();
@@ -38,6 +45,10 @@ void FlightAdvisor::loadData() {
 	} catch (notConnectedGraphException &e) {
 		cout << "The network is not connected! The waypoint "
 				<< e.getWaypointWithoutEdges() << " don't have edges!" << endl;
+		exit(1);
+	}
+	catch(InvalidEdgeException &e){
+		cout << "The network have an invalid edge: " << e.getEdge() << endl;
 		exit(1);
 	}
 }
@@ -237,9 +248,9 @@ void FlightAdvisor::showGraphNetwork() {
 		long double lat =
 				LoadData::getWayPointbyID(routes[i]->getInfo()).getLocalization().getLatitude();
 		double x = (180 + lon) * (mapwidth / 360.0) - fixedLowestXforEuropeMap;
-		x = 11 * x + 130;
+		x = 11 * x + 130; // adjustments
 		double y = (90 - lat) * (mapheight / 180.0) - fixedLowestYforEuropeMap;
-		y = 11 * y + 95;
+		y = 11 * y + 95; // adjustments
 		// Create the node
 		gv->addNode(i, x, y);
 		gv->setVertexLabel(i, routes[i]->getInfo());

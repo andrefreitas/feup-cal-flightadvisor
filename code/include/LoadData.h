@@ -9,6 +9,7 @@
 #include "Graph.h"
 #include "Waypoint.h"
 #include "Airport.h"
+#include <sstream>
 
 using namespace std;
 //!
@@ -79,6 +80,20 @@ public:
 	}
 	string getWaypointWithoutEdges() {
 		return waypoint;
+	}
+};
+//!
+/*! InvalidEdgeException - A class that is thrown when an invalid edge is created
+ */
+class InvalidEdgeException{
+	string source;
+	string destination;
+public:
+	InvalidEdgeException(string source, string destination):source(source),destination(destination){};
+	string getEdge(){
+		stringstream ss;
+		ss << source << " => " << destination << endl;
+		return ss.str();
 	}
 };
 #endif
