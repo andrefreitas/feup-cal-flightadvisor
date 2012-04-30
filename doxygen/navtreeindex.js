@@ -1,0 +1,25 @@
+var NAVTREEINDEX =
+{
+"index.html":[],
+"annotated.html":[0,0],
+"class_airport.html":[0,0,0],
+"class_flight_advisor.html":[0,0,1],
+"class_invalid_edge_exception.html":[0,0,2],
+"class_invalid_file_name_exception.html":[0,0,3],
+"class_invalid_i_a_t_a_exception.html":[0,0,4],
+"class_invalid_i_c_a_o_exception.html":[0,0,5],
+"class_invalid_strings_size_exception.html":[0,0,6],
+"class_load_data.html":[0,0,7],
+"class_localization.html":[0,0,8],
+"classnot_connected_graph_exception.html":[0,0,9],
+"classopen_file_exception.html":[0,0,10],
+"classtest_airport.html":[0,0,11],
+"classtest_waypoint.html":[0,0,12],
+"class_waypoint.html":[0,0,13],
+"classes.html":[0,1],
+"hierarchy.html":[0,2],
+"functions.html":[0,3,0],
+"functions_func.html":[0,3,1],
+"functions_vars.html":[0,3,2],
+"files.html":[1,0]
+};

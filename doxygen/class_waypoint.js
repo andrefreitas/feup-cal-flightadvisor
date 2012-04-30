@@ -1,0 +1,26 @@
+var class_waypoint =
+[
+    [ "Waypoint", "class_waypoint.html#a603282f0dcb05f2590cdd8e4e01b760c", null ],
+    [ "Waypoint", "class_waypoint.html#a3b466c4bb0a7a0ab86b7a393ba1be88e", null ],
+    [ "Waypoint", "class_waypoint.html#aa063fce5db492e5adfa232f026a27367", null ],
+    [ "~Waypoint", "class_waypoint.html#aafe65ab77293572f08ec48700886791f", null ],
+    [ "getCountry", "class_waypoint.html#a107b4a59ef9d672de2323f456e269f67", null ],
+    [ "getIATA", "class_waypoint.html#a883ee7e1426343345632c553381d0142", null ],
+    [ "getICAO", "class_waypoint.html#ac21f1438770b9b7e857aa920a82769fd", null ],
+    [ "getID", "class_waypoint.html#a00e58890a2bd71578eab31ea9f0b3b5b", null ],
+    [ "getLocalization", "class_waypoint.html#a8f2de153f114c773df3be547711df3a2", null ],
+    [ "getName", "class_waypoint.html#aba5d5a74b82f6ad7a3f7115ee056050d", null ],
+    [ "isAirport", "class_waypoint.html#a379c154bf426139d486a89bc9639eb3d", null ],
+    [ "setByStrings", "class_waypoint.html#ae84d5297945cfc19186476ac37f403e4", null ],
+    [ "setCountry", "class_waypoint.html#a81f7f7c42d664d79b6ca52755b097d9f", null ],
+    [ "setIATA", "class_waypoint.html#a8855150edc9629a971686db6aaf9a163", null ],
+    [ "setICAO", "class_waypoint.html#aa9f83a6651ff3ae4dc4070dc0641d785", null ],
+    [ "setID", "class_waypoint.html#a70860724a4601accf9c64b9ed5ad93d9", null ],
+    [ "setLocalization", "class_waypoint.html#ab5d1d6bc6ae38e36b89870a60fd5fd3c", null ],
+    [ "setLocalization", "class_waypoint.html#aa1c52de1230d880365273193a30b3991", null ],
+    [ "setName", "class_waypoint.html#a2126b51acf8d448dcca6f34c983260af", null ],
+    [ "country", "class_waypoint.html#a88b7d2345a8d833dc04228264efbf35c", null ],
+    [ "id", "class_waypoint.html#a69a698bcb3dfd5ad40f2039c8bdb5574", null ],
+    [ "localization", "class_waypoint.html#ae3553fda43b8215ebe2d8b5a98cd1e7f", null ],
+    [ "name", "class_waypoint.html#ac4090a5b8c514334235ee6371f067602", null ]
+];
