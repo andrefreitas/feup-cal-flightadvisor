@@ -12,8 +12,8 @@
 #include <sstream>
 
 using namespace std;
-//!
-/*! LoadData - A class for loading graph flight routes data from CSV files.
+//! LoadData - A class for loading graph flight routes data from CSV files.
+/*!
  * It needs a waypoint, airport and network in .csv format. This class is
  * delivered with mostly static methods because is a functional class.
  */
@@ -59,9 +59,7 @@ public:
 
 };
 
-//!
-/*! openFileException - A class for handling file opening exceptions
- */
+//! A class for handling file opening exceptions
 class openFileException {
 public:
 	openFileException() {
@@ -69,9 +67,7 @@ public:
 	;
 
 };
-//!
-/*! notConnectedGraphException - A class that is thrown when a not connected graph is created
- */
+//!A class that is thrown when a not connected graph is created
 class notConnectedGraphException {
 	string waypoint;
 public:
@@ -82,9 +78,7 @@ public:
 		return waypoint;
 	}
 };
-//!
-/*! InvalidEdgeException - A class that is thrown when an invalid edge is created
- */
+//!A class that is thrown when an invalid edge is created
 class InvalidEdgeException{
 	string source;
 	string destination;
