@@ -58,10 +58,6 @@ public:
 				nearest=&objects[i];
 		return nearest;
 	}
-	//! Convert degree to radians
-	/*!
-	 \param x the degree value
-	 */
 };
 
 #endif /* LOCALIZATION_H_ */

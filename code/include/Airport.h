@@ -53,6 +53,7 @@ public:
 
 	//! Evaluates if is an airport
 	bool isAirport();
+	//! Virtual destructor
 	virtual ~Airport(){};
 
 };

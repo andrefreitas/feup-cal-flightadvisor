@@ -773,8 +773,10 @@ vector<T> bestPathUnweighted(Graph<T> *graph, const T &o, const T &d) {
 template<class T>
 // Brute force solution
 bool Graph<T>::havePathsWithSameSize(const T &o, const T &d) {
+	// (1) Calculate the best path between o and d
 	vector<T> bestPath = bestPathUnweighted(this, o, d);
 
+	// (2) Run that path and by removing each time a node, check if is possible another path
 	for (int unsigned i = 1; i < (bestPath.size() - 1); i++) {
 		Graph<T> tempGraph;
 		this->clone(tempGraph);
@@ -782,9 +784,8 @@ bool Graph<T>::havePathsWithSameSize(const T &o, const T &d) {
 		vector<T> tempBestPath = bestPathUnweighted(&tempGraph, o, d);
 		if (tempBestPath.size() == bestPath.size())
 			return true;
-
 	}
-
+	// (3) If the execution got here was because an alternative path has not been found
 	return false;
 }
 

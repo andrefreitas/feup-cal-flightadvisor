@@ -11,55 +11,73 @@
 #include "Airport.h"
 
 using namespace std;
-/**
- * LoadData - A class for loading graph flight routes data from CSV files.
+//!
+/*! LoadData - A class for loading graph flight routes data from CSV files.
+ * It needs a waypoint, airport and network in .csv format. This class is
+ * delivered with mostly static methods because is a functional class.
  */
 class LoadData {
 private:
-	static vector<Waypoint> waypoints; // note that an waypoint can be an airport, but here is only the pure waypoints
-	static vector<Airport> airports;
+	static vector<Waypoint> waypoints; //!< The vector of airports
+	static vector<Airport> airports; //!< The vector of waypoints (that are not airports)
 public:
-    /**
-     * Create a graph from the files data
-     * @return a graph of strings
-     */
-    static Graph<string> createGraph(string networkFileName,string airportsFileName, string waypointsFileName);
-     /**
-     * Reads a CSV file and returns a vector of lines. Each line is a vector of strings.
-     * @param nameFile the file name
-     * @return a vector of string vectors
-     */
-    static vector< vector<string> > loadFile(string nameFile);
-    /**
-     * Loads all the waypoints
-     */
-    static vector<Waypoint> loadWaypoints(string nameFile);
-    /**
-     * Loads all the airports
-     */
-    static vector<Airport> loadAirports(string nameFile);
-    /**
-     * Get the waypoint (including airports) by the id. Remember that if a waypoint is an airport, then the id is the ICAO (i.e. LPPT)
-     */
-    static Waypoint getWayPointbyID(string id);
+	//!
+	/*! Create a graph from the files data
+	 \return a graph of strings
+	 */
+	static Graph<string> createGraph(string networkFileName,
+			string airportsFileName, string waypointsFileName);
+
+	//!
+	/*! Reads a CSV file and returns a vector of lines. Each line is a vector of strings.
+	 * \param nameFile the file name
+	 * \return a vector of string vectors
+	 */
+	static vector<vector<string> > loadFile(string nameFile);
+
+	//!
+	/*! Loads all the waypoints
+	 * \param nameFile the file name
+	 * \return a vector of Waypoints
+	 */
+	static vector<Waypoint> loadWaypoints(string nameFile);
+	//!
+	/*! Loads all the airports
+	 * \param nameFile the file name
+	 * \return a vector of Waypoints
+	 */
+	static vector<Airport> loadAirports(string nameFile);
+
+	//!
+	/*!
+	 * Get the waypoint (including airports) by the id. Remember that if a waypoint is an airport, then the id is the ICAO (i.e. LPPT)
+	 * \param id the id
+	 * \return an waypoint if exists
+	 */
+	static Waypoint getWayPointbyID(string id);
 
 };
 
-/**
- * openFileException - A class for handling file opening exceptions
+//!
+/*! openFileException - A class for handling file opening exceptions
  */
 class openFileException {
 public:
-    openFileException(){};
+	openFileException() {
+	}
+	;
 
 };
-class notConnectedGraphException{
+//!
+/*! notConnectedGraphException - A class that is thrown when a not connected graph is created
+ */
+class notConnectedGraphException {
 	string waypoint;
 public:
-	notConnectedGraphException(string waypoint){
-		this->waypoint=waypoint;
+	notConnectedGraphException(string waypoint) {
+		this->waypoint = waypoint;
 	}
-	string getWaypointWithoutEdges(){
+	string getWaypointWithoutEdges() {
 		return waypoint;
 	}
 };

@@ -9,7 +9,9 @@
 #include <vector>
 #include <iostream>
 using namespace std;
-
+//! Class testAirport
+/*! A class for testing the class Airport
+*/
 class testAirport {
 public:
 	static void testData() {

@@ -5,7 +5,9 @@
 #include "ide_listener.h"
 #include "cute_runner.h"
 #include "Waypoint.h"
-
+//! Class testAirport
+/*! A class for testing the class Waypoint
+*/
 class testWaypoint {
 public:
 	static void testData() {
