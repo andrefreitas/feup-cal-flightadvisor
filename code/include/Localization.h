@@ -6,9 +6,7 @@
 #include <iostream>
 using namespace std;
 
-//! Class Localization
-/*! This classe defines a position in earth by latitude and longitude
-*/
+//! This classe defines a position in earth by latitude and longitude
 class Localization{
 	//! The latitude relative to Equator
 	long double latitude;

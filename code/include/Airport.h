@@ -6,9 +6,7 @@
 #include "Waypoint.h"
 using namespace std;
 
-//! Class Airport
-/*! This class defines an Airport with it's basic information
- */
+//! A class for an Airport with it's basic information
 class Airport: public Waypoint {
 protected:
 	//! The code assigned by International Air Transport Association (IATA)

@@ -8,9 +8,8 @@
 #include <string.h>
 #include <vector>
 #include "graphviewer.h"
-//! Class FlightAdvisor
-/*! A class for describing a program that chooses the best routes according the source and destination airport.
- * The network of flight paths is represented as a graph and the decisions are made upon graphs algorithms.
+//! A class for describing a program that chooses the best routes according the source and destination airport.
+/*! The network of flight paths is represented as a graph and the decisions are made upon graphs algorithms.
  * Remember that an waypoint is a place in a map that a plane must pass. That waypoint can be an airport or not.
  */
 class FlightAdvisor{
@@ -82,7 +81,7 @@ public:
 	//! Run the FlightAdvisor in the arg mode. ex: flightadvisor LPPT LPPR
 	void runArgsMode(int argc,char *argv[]);
 };
-//! Class InvalidFileNameException - a class for handling filenames that doesn't exist
+//! A class for handling filenames that doesn't exist
 class InvalidFileNameException{
 	string fileName;
 public:

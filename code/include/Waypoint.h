@@ -5,11 +5,8 @@
 #include "Localization.h"
 using namespace std;
 
-//! Class Waypoint
-/*!
- * A waypoint is a determinaded spot in a route that a plane must pass,
- * between an airport A and B. Note that the source and destination airports
- * are waypoints, so the airport is a sub-class of waypoint.
+//! A waypoint is a determinated spot in a route that a plane must pass
+/*! Note that the source and destination airports are waypoints, so the airport is a sub-class of waypoint.
  */
 class Waypoint {
 protected:
